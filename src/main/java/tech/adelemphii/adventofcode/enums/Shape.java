@@ -33,12 +33,22 @@ public enum Shape {
         };
     }
 
-    public char getP1Answer() {
-        return p1Answer;
+    public Shape losesAgainst() {
+        return switch(this) {
+            case ROCK -> PAPER;
+            case PAPER -> SCISSORS;
+            case SCISSORS -> ROCK;
+        };
     }
 
-    public char getP2Answer() {
-        return p2Answer;
+    public Shape complement(Outcome required, Shape opponent) {
+        if(required == Outcome.WIN) {
+            return opponent.losesAgainst();
+        } else if(required == Outcome.LOSS) {
+            return opponent.canBeat();
+        } else {
+            return opponent;
+        }
     }
 
     public int getPoints() {

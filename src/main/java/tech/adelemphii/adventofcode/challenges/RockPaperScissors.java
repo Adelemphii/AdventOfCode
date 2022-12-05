@@ -58,10 +58,12 @@ public class RockPaperScissors {
                     char p2Char = args[1].charAt(0);
 
                     Shape p1Input = Shape.getShapeFromChar(p1Char);
+                    Outcome requiredOutcome = requiredOutcome(p2Char);
                     Shape p2Input = Shape.getShapeFromChar(p2Char);
                     if(p1Input == null || p2Input == null) {
                         return null;
                     }
+                    p2Input = p2Input.complement(requiredOutcome, p1Input);
 
                     int player1Total = points.getOrDefault(getPlayer1Name(), 0)
                             + p1Input.getPoints();
@@ -84,6 +86,16 @@ public class RockPaperScissors {
                 e.printStackTrace();
             }
             return points;
+        }
+
+        private Outcome requiredOutcome(char c) {
+            if(c == 'X') {
+                return Outcome.LOSS;
+            } else if(c == 'Y') {
+                return Outcome.DRAW;
+            } else {
+                return Outcome.WIN;
+            }
         }
     }
 }
