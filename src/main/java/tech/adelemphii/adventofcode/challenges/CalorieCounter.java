@@ -22,6 +22,20 @@ public class CalorieCounter {
                 .toList());
         Collections.reverse(collection);
         collection.forEach(person -> System.out.println(person.getId() + " - " + person.getCalories()));
+
+        System.out.println("Top 3:");
+        int j = 0;
+        int total = 0;
+        for(CCPerson person : collection) {
+            if(j == 3) {
+                break;
+            }
+            total += person.getCalories();
+
+            System.out.println(person.getId() + " - " + person.getCalories());
+            j++;
+        }
+        System.out.println("Total: " + total);
     }
 
     // such me-tier code
